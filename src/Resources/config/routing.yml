@@ -1,0 +1,7 @@
+dstf_ajax_load_news:
+    path: /phpbb/{location}
+    defaults:
+        location: null
+        _scope: frontend
+        _token_check: false
+        _controller: Doublespark\ContaoForumBridgeBundle\Controller\RedirectController::redirectAction

@@ -1,0 +1,27 @@
+{
+  "name": "doublespark/contao-forum-bridge-bundle",
+  "type": "contao-bundle",
+  "description": "Connects phpBB to Contao",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jamie Devine",
+      "homepage": "https://www.doublespark.co.uk"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "contao/core-bundle": "^4.8",
+    "guzzlehttp/guzzle": "^6.5",
+    "contao/manager-plugin": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Doublespark\\ContaoForumBridgeBundle\\": "src/",
+      "Doublespark\\ContaoForumBridgeBundle\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Doublespark\\ContaoForumBridgeBundle\\ContaoManager\\Plugin"
+  }
+}

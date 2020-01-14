@@ -1,0 +1,40 @@
+services:
+  doublespark.forum_bridge.phpbb:
+    class: Doublespark\ContaoForumBridgeBundle\Client\PhpBB
+    factory: ['Doublespark\ContaoForumBridgeBundle\Factory\PhpBBStaticFactory', 'createPhpBB']
+    public: true
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\Dca\MemberTableListener:
+    public: true
+    tags:
+      - { name: 'contao.callback', table: 'tl_member', target: 'config.ondelete' }
+      - { name: 'contao.callback', table: 'tl_member', method: 'onGetPhpBBMemberOptions', target: 'fields.phpbb_user_id.options' }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\Dca\MemberGroupTableListener:
+    public: true
+    tags:
+      - { name: 'contao.callback', table: 'tl_member_group', method: 'onGetGroupOptions', target: 'fields.phpbb_group.options' }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\InitializeSystemListener:
+    tags:
+      - { name: contao.hook, hook: initializeSystem, method: onInitializeSystem, priority: 0 }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\CreateNewUserListener:
+    tags:
+      - { name: contao.hook, hook: createNewUser, method: onCreateNewUser, priority: 0 }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\UpdatePersonalDataListener:
+    tags:
+      - { name: contao.hook, hook: updatePersonalData, method: onUpdatePersonalData, priority: 0 }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\SetNewPasswordListener:
+    tags:
+      - { name: contao.hook, hook: setNewPassword, method: onSetNewPassword, priority: 0 }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\PostLoginListener:
+    tags:
+      - { name: contao.hook, hook: postLogin, method: onPostLogin, priority: 0 }
+
+  Doublespark\ContaoForumBridgeBundle\EventListener\PostLogoutListener:
+    tags:
+      - { name: contao.hook, hook: postLogout, method: onPostLogout, priority: 0 }
