@@ -22,35 +22,40 @@ class InitializeSystemListener {
     {
         if(Config::get('phpbb_bridge_enabled'))
         {
-            $loggedIn = System::getContainer()->get('contao.security.token_checker')->hasFrontendUser();
+            $hasUser = System::getContainer()->get('contao.security.token_checker')->hasFrontendUser();
 
-            if($loggedIn)
+            if($hasUser)
             {
                 $objUser = FrontendUser::getInstance();
 
-                $domain = Config::get('phpbb_domain');
-
-                if(empty($domain))
+                if(!is_null($objUser->id))
                 {
-                    $domain = null;
-                }
+                    $objUser = FrontendUser::getInstance();
 
-                System::setCookie('phpbridgeuid', $objUser->id, 0, '/', $domain);
+                    $domain = Config::get('phpbb_domain');
 
-                // Create or update the session record
-                $objCount = Database::getInstance()->prepare('SELECT COUNT(*) AS count FROM tl_phpbb_session WHERE member_id=?')->execute($objUser->id);
+                    if(empty($domain))
+                    {
+                        $domain = null;
+                    }
 
-                $ip         = Environment::get('ip');
-                $lastActive = time();
-                $expires    = Config::get('sessionTimeout') + $lastActive;
+                    System::setCookie('phpbridgeuid', $objUser->id, 0, '/', $domain);
 
-                if($objCount->count > 0)
-                {
-                    Database::getInstance()->prepare('UPDATE tl_phpbb_session SET ip_address=?, last_active=?, expires=?')->execute($ip, $lastActive, $expires);
-                }
-                else
-                {
-                    Database::getInstance()->prepare('INSERT INTO tl_phpbb_session SET member_id=?, ip_address=?, last_active=?, expires=?')->execute($objUser->id, $ip, $lastActive, $expires);
+                    // Create or update the session record
+                    $objCount = Database::getInstance()->prepare('SELECT COUNT(*) AS count FROM tl_phpbb_session WHERE member_id=?')->execute($objUser->id);
+
+                    $ip         = Environment::get('ip');
+                    $lastActive = time();
+                    $expires    = Config::get('sessionTimeout') + $lastActive;
+
+                    if($objCount->count > 0)
+                    {
+                        Database::getInstance()->prepare('UPDATE tl_phpbb_session SET ip_address=?, last_active=?, expires=?')->execute($ip, $lastActive, $expires);
+                    }
+                    else
+                    {
+                        Database::getInstance()->prepare('INSERT INTO tl_phpbb_session SET member_id=?, ip_address=?, last_active=?, expires=?')->execute($objUser->id, $ip, $lastActive, $expires);
+                    }
                 }
             }
         }
