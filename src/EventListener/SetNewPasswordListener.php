@@ -4,7 +4,6 @@ namespace Doublespark\ContaoForumBridgeBundle\EventListener;
 
 use Contao\Config;
 use Contao\Database;
-use Contao\Module;
 
 /**
  * Class SetNewPasswordListener
@@ -16,9 +15,8 @@ class SetNewPasswordListener extends ForumBridgeEventListener {
     /**
      * @param $member
      * @param string $password
-     * @param Module $module
      */
-    public function onSetNewPassword($member, string $password, Module $module): void
+    public function onSetNewPassword($member, string $password): void
     {
         if(Config::get('phpbb_bridge_enabled'))
         {
