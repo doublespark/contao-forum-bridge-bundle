@@ -2,10 +2,8 @@
 
 namespace Doublespark\ContaoForumBridgeBundle\Controller;
 
-use App\DsTfCustom\Ajax\NewsAjax;
 use Contao\Config;
 use Contao\PageModel;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
