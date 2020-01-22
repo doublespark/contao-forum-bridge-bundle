@@ -77,7 +77,7 @@ class CreateNewUserListener extends ForumBridgeEventListener {
                 $phpbbUserId = $arrResponse['data']['user_id'];
 
                 // Save the phpbb user ID to the Contao member
-                Database::getInstance()->prepare('UPDATE tl_member SET phpbb_user_id=? WHERE id=?')->execute($phpbbUserId,$userId);
+                Database::getInstance()->prepare('UPDATE tl_member SET phpbb_user_id=?,phpbb_group=? WHERE id=?')->execute($phpbbUserId,$phpbb_group,$userId);
 
                 $this->logInfo('phpBB user created. MemberID: '.$userId.' phpbbID: '.$phpbbUserId, __METHOD__);
             }

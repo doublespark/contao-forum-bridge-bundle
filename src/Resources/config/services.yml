@@ -9,11 +9,13 @@ services:
     tags:
       - { name: 'contao.callback', table: 'tl_member', target: 'config.ondelete' }
       - { name: 'contao.callback', table: 'tl_member', method: 'onGetPhpBBMemberOptions', target: 'fields.phpbb_user_id.options' }
+      - { name: 'contao.callback', table: 'tl_member', method: 'onSavePhpBBGroup', target: 'fields.phpbb_group.save' }
 
   Doublespark\ContaoForumBridgeBundle\EventListener\Dca\MemberGroupTableListener:
     public: true
     tags:
       - { name: 'contao.callback', table: 'tl_member_group', method: 'onGetGroupOptions', target: 'fields.phpbb_group.options' }
+      - { name: 'contao.callback', table: 'tl_member', method: 'onGetGroupOptions', target: 'fields.phpbb_group.options' }
 
   Doublespark\ContaoForumBridgeBundle\EventListener\InitializeSystemListener:
     tags:

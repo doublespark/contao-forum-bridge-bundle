@@ -85,4 +85,35 @@ class MemberTableListener extends ForumBridgeEventListener {
 
         return $arrOptions;
     }
+
+    /**
+     * @param $value
+     * @param DataContainer $dc
+     * @return mixed
+     */
+    public function onSavePhpBBGroup($value, DataContainer $dc)
+    {
+        if(Config::get('phpbb_bridge_enabled'))
+        {
+            $userId  = $dc->activeRecord->phpbb_user_id;
+            $groupId = $value;
+
+            /**
+             * @var PhpBB $phpBB
+             */
+            $phpBB = System::getContainer()->get('doublespark.forum_bridge.phpbb');
+
+            try {
+
+                $phpBB->changeUserGroup($userId, $groupId);
+
+            } catch(\Exception $e) {
+
+                $this->logError($e->getMessage(),__METHOD__);
+                return;
+            }
+        }
+
+        return $value;
+    }
 }

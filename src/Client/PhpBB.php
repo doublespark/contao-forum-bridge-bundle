@@ -66,6 +66,22 @@ class PhpBB {
     }
 
     /**
+     * Changes a user's group
+     * @param int $userId
+     * @param int $groupId
+     * @return array
+     */
+    public function changeUserGroup(int $userId, int $groupId)
+    {
+        $arrData = [
+            'user_id'  => $userId,
+            'group_id' => $groupId
+        ];
+
+        return $this->callApi('POST', 'changeUserGroup', $arrData);
+    }
+
+    /**
      * Set a key for API request tokens
      * @param string $secretKey
      */
