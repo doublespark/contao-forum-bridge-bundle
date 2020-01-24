@@ -23,7 +23,9 @@ class MemberGroupTableListener {
             return [0 => 'Forum Bridge Disabled'];
         }
 
-        $arrOptions = [];
+        $arrOptions = [
+            '99999' => 'Set in phpBB (group will not sync)'
+        ];
 
         $prefix = Config::get('phpbb_prefix');
 
@@ -32,10 +34,25 @@ class MemberGroupTableListener {
             'REGISTERED'        => 'Registered users',
             'REGISTERED_COPPA'  => 'Registered COPPA users',
             'GLOBAL_MODERATORS' => 'Global moderators',
-            'ADMINISTRATORS'    => 'Administrators'
+            'ADMINISTRATORS'    => 'Administrators',
+            'BOTS'              => 'Bots',
+            'NEWLY_REGISTERED'  => 'Newly registered',
+            'GUESTS'            => 'Guests'
         ];
 
-        $arrIgnoredGroups = ['BOTS','NEWLY_REGISTERED','GUESTS'];
+        $allowedGroups = Config::get('phpbb_group_options');
+
+        // No allowed groups
+        if(empty($allowedGroups))
+        {
+            return $arrOptions;
+        }
+
+        // Convert to array if it's not already an array
+        if(!is_array($allowedGroups))
+        {
+            $allowedGroups = unserialize($allowedGroups);
+        }
 
         $objResult = Database::getInstance()->query('SELECT * FROM '.$prefix.'groups ORDER BY group_name ASC');
 
@@ -43,7 +60,7 @@ class MemberGroupTableListener {
         {
             while($objResult->next())
             {
-                if(in_array($objResult->group_name,$arrIgnoredGroups))
+                if(!in_array($objResult->group_id,$allowedGroups))
                 {
                     continue;
                 }

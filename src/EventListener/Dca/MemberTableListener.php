@@ -98,6 +98,12 @@ class MemberTableListener extends ForumBridgeEventListener {
             $userId  = $dc->activeRecord->phpbb_user_id;
             $groupId = $value;
 
+            // Don't sync
+            if($value == 99999 || $value == '')
+            {
+                return $value;
+            }
+
             /**
              * @var PhpBB $phpBB
              */

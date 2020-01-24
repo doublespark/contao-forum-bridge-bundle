@@ -6,7 +6,7 @@
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] =  str_replace
 (
     '{search_legend:hide}',
-    '{phpbb_bridge_legend:hide},phpbb_bridge_enabled,phpbb_secret_key,phpbb_domain,phpbb_base_url,phpbb_register_page,phpbb_login_page,phpbb_logout_page,phpbb_account_page;{search_legend:hide}',
+    '{phpbb_bridge_legend:hide},phpbb_bridge_enabled,phpbb_group_options,phpbb_secret_key,phpbb_domain,phpbb_base_url,phpbb_register_page,phpbb_login_page,phpbb_logout_page,phpbb_account_page;{search_legend:hide}',
     $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']
 );
 
@@ -76,4 +76,12 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['phpbb_logout_page'] = array
     'inputType'  => 'pageTree',
     'foreignKey' => 'tl_page.title',
     'eval'       => array('mandatory'=>true, 'fieldType'=>'radio')
+);
+
+// Select which group options are available
+$GLOBALS['TL_DCA']['tl_settings']['fields']['phpbb_group_options'] = array
+(
+    'label'      => &$GLOBALS['TL_LANG']['tl_settings']['phpbb_group_options'],
+    'inputType'  => 'checkbox',
+    'eval'       => array('multiple'=>true)
 );

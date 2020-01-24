@@ -8,3 +8,4 @@ $GLOBALS['TL_LANG']['tl_settings']['phpbb_login_page']     = array('Login page',
 $GLOBALS['TL_LANG']['tl_settings']['phpbb_logout_page']    = array('Log out page', 'The Contao page where the log out module is located.');
 $GLOBALS['TL_LANG']['tl_settings']['phpbb_account_page']   = array('Account page', 'The Contao page where the member account management is located.');
 $GLOBALS['TL_LANG']['tl_settings']['phpbb_secret_key']     = array('Secret key', 'Enter a key here to make requests more secure. The same key needs to be set in phpBB.');
+$GLOBALS['TL_LANG']['tl_settings']['phpbb_group_options']  = array('Available groups', 'The phpBB groups which are available in the groups select boxes.');

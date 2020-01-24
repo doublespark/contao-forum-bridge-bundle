@@ -17,6 +17,11 @@ services:
       - { name: 'contao.callback', table: 'tl_member_group', method: 'onGetGroupOptions', target: 'fields.phpbb_group.options' }
       - { name: 'contao.callback', table: 'tl_member', method: 'onGetGroupOptions', target: 'fields.phpbb_group.options' }
 
+  Doublespark\ContaoForumBridgeBundle\EventListener\Dca\SettingsListener:
+    public: true
+    tags:
+      - { name: 'contao.callback', table: 'tl_settings', method: 'onGetGroupOptions', target: 'fields.phpbb_group_options.options' }
+
   Doublespark\ContaoForumBridgeBundle\EventListener\InitializeSystemListener:
     tags:
       - { name: contao.hook, hook: initializeSystem, method: onInitializeSystem, priority: 0 }
