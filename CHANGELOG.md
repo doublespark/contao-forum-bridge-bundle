@@ -1,5 +1,10 @@
 # Changelog
 
+v1.0.4
+-----------------------------------
+* Add setting to control which groups are listed
+* Add option to not sync group to phpBB
+
 v1.0.3
 -----------------------------------
 * Allow phpBB user group to be changed from Contao BE
