@@ -1,5 +1,9 @@
 # Changelog
 
+v1.0.5
+-----------------------------------
+* Fix bug with sessions when logged in from multiple browsers / devices
+
 v1.0.4
 -----------------------------------
 * Add setting to control which groups are listed
