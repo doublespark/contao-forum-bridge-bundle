@@ -13,8 +13,9 @@ $GLOBALS['TL_DCA']['tl_phpbb_session'] = array
         (
             'keys' => array
             (
-                'id'        => 'primary',
-                'member_id' => 'index'
+                'id'          => 'primary',
+                'member_id'   => 'index',
+                'session_key' => 'index'
             )
         )
     ),
@@ -42,5 +43,17 @@ $GLOBALS['TL_DCA']['tl_phpbb_session'] = array
         (
             'sql' => "varchar(255) NOT NULL default ''"
         ),
+        'user_agent' => array
+        (
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'session_key' => array
+        (
+            'sql' => "varchar(255) NOT NULL default ''"
+        ),
+        'phpbb_session_id' => array
+        (
+            'sql' => "varchar(255) NOT NULL default ''"
+        )
     )
 );
