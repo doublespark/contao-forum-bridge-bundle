@@ -3,12 +3,21 @@
 /**
  * Table tl_settings
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] =  str_replace
-(
-    '{search_legend:hide}',
-    '{phpbb_bridge_legend:hide},phpbb_bridge_enabled,phpbb_group_options,phpbb_secret_key,phpbb_domain,phpbb_base_url,phpbb_register_page,phpbb_login_page,phpbb_logout_page,phpbb_account_page;{search_legend:hide}',
-    $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']
-);
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+
+PaletteManipulator::create()
+    ->addLegend('phpbb_bridge_legend', null, PaletteManipulator::POSITION_AFTER, true)
+    ->addField('phpbb_bridge_enabled', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_group_options', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_secret_key', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_domain', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_base_url', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_register_page', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_login_page', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_logout_page', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('phpbb_account_page', 'phpbb_bridge_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('default', 'tl_settings')
+;
 
 // Fields
 $GLOBALS['TL_DCA']['tl_settings']['fields']['phpbb_bridge_enabled'] = array(
