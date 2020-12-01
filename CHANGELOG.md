@@ -1,5 +1,9 @@
 # Changelog
 
+v1.0.6
+-----------------------------------
+* Use PaletteManipulator in tl_settings.php
+
 v1.0.5
 -----------------------------------
 * Fix bug with sessions when logged in from multiple browsers / devices
